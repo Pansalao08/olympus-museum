@@ -1,0 +1,312 @@
+{% extends "base.html" %}
+
+{% block content %}
+<style>
+    .hero-splash-screen {
+        height: 85vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        background: radial-gradient(circle at center, #13182b 0%, #05050a 100%);
+        padding: 0 2rem;
+        border-bottom: 2px solid rgba(0, 242, 254, 0.3);
+    }
+
+    .splash-badge {
+        padding: 0.5rem 1.5rem;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 3px;
+        color: var(--accent-neon-yellow);
+        border: 1px solid var(--accent-neon-yellow);
+        border-radius: 50px;
+        margin-bottom: 1.5rem;
+        box-shadow: 0 0 15px rgba(255, 234, 0, 0.3);
+    }
+
+    .splash-main-title {
+        font-family: 'Cinzel', serif;
+        font-size: clamp(3.5rem, 8vw, 7.5rem);
+        font-weight: 900;
+        letter-spacing: 6px;
+        color: var(--text-main);
+        margin-bottom: 1rem;
+        text-shadow: 0 0 30px var(--accent-neon-cyan);
+    }
+
+    .splash-desc {
+        font-size: 1.15rem;
+        letter-spacing: 2px;
+        color: var(--text-muted);
+        max-width: 700px;
+        margin-bottom: 2.5rem;
+        line-height: 1.6;
+    }
+
+    .btn-explore {
+        background: transparent;
+        color: var(--text-main);
+        border: 2px solid var(--accent-neon-magenta);
+        padding: 1.2rem 3rem;
+        font-size: 0.95rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        cursor: pointer;
+        border-radius: 50px;
+        transition: all 0.4s ease;
+        box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
+    }
+
+    .btn-explore:hover {
+        background: var(--accent-neon-magenta);
+        color: #ffffff;
+        box-shadow: 0 0 35px var(--accent-neon-magenta);
+        transform: translateY(-4px);
+    }
+
+    .intro-encyclopedia {
+        padding: 5rem 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .intro-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+    }
+
+    .intro-card {
+        background: var(--bg-card);
+        border: 1px solid var(--card-border);
+        padding: 2.5rem;
+        border-radius: 20px;
+        position: relative;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .intro-card:hover {
+        transform: translateY(-5px);
+        border-color: var(--accent-neon-cyan);
+    }
+
+    .intro-symbol {
+        font-size: 3.5rem;
+        margin-bottom: 1.5rem;
+        display: block;
+        filter: drop-shadow(0 0 10px rgba(0, 242, 254, 0.4));
+    }
+
+    .intro-card h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.5rem;
+        color: var(--text-main);
+        margin-bottom: 1rem;
+    }
+
+    .intro-card p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.7;
+    }
+
+    .museum-catalog {
+        padding: 4rem 5%;
+        max-width: 1400px;
+        margin: 0 auto;
+    }
+
+    .hall-header {
+        text-align: center;
+        margin-bottom: 4rem;
+    }
+
+    .hall-header h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 2.5rem;
+        letter-spacing: 3px;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+    }
+
+    .hall-header p {
+        color: var(--text-muted);
+        font-size: 1rem;
+    }
+
+    .museum-section {
+        margin-bottom: 5rem;
+    }
+
+    .section-title {
+        font-family: 'Cinzel', serif;
+        font-size: 1.8rem;
+        margin-bottom: 2.5rem;
+        letter-spacing: 2px;
+        padding-left: 1rem;
+        border-left: 4px solid var(--accent-neon-cyan);
+    }
+
+    .sports-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+    }
+
+    .vector-card {
+        position: relative;
+        height: 360px;
+        border-radius: 20px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        padding: 2.5rem;
+        background: var(--bg-card);
+        border: 1px solid var(--card-border);
+        transition: all 0.4s ease;
+    }
+
+    .vector-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 15px 35px rgba(0, 242, 254, 0.25);
+    }
+
+    .vector-card-icon {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 4.5rem;
+        opacity: 0.2;
+        transition: all 0.4s ease;
+    }
+
+    .vector-card:hover .vector-card-icon {
+        opacity: 0.6;
+        transform: scale(1.15) rotate(10deg);
+    }
+
+    .vector-card-tag {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        font-weight: 800;
+        margin-bottom: 0.5rem;
+    }
+
+    .vector-card h3 {
+        font-family: 'Cinzel', serif;
+        font-size: 2rem;
+        color: var(--text-main);
+        margin-bottom: 0.5rem;
+    }
+
+    .vector-card p {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+        margin-bottom: 1.5rem;
+    }
+
+    .vector-card-btn {
+        font-size: 0.85rem;
+        font-weight: 800;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+    }
+</style>
+
+    <!-- Hero Splash -->
+    <section class="hero-splash-screen">
+        <div class="splash-badge">EXPOSICIÓN MAGISTRAL 2026</div>
+        <h1 class="splash-main-title">OLYMPUS</h1>
+        <p class="splash-desc">El archivo enciclopédico definitivo de la gloria deportiva mundial. Estética cibernética, historia profunda y las leyendas inmortales del atletismo y los eSports.</p>
+        <button class="btn-explore" onclick="document.getElementById('catalog').scrollIntoView({behavior: 'smooth'})">ACCEDER AL CATÁLOGO &rarr;</button>
+    </section>
+
+    <!-- INTRODUCCIÓN Y SÍMBOLOS VECTORIALES -->
+    <section class="intro-encyclopedia">
+        <div class="hall-header" style="margin-bottom: 2rem;">
+            <h2>FILOSOFÍA Y SIMBOLOGÍA DEL ATLETISMO</h2>
+            <p>Los pilares fundamentales que rigen el rendimiento humano y la estrategia competitiva.</p>
+        </div>
+        <div class="intro-grid">
+            <div class="intro-card">
+                <span class="intro-symbol">⚡</span>
+                <h3>Explosividad Motriz</h3>
+                <p>La capacidad de liberar energía cinética máxima en milisegundos, fundamental en deportes de aceleración como el fútbol, el atletismo y el hockey.</p>
+            </div>
+            <div class="intro-card">
+                <span class="intro-symbol">🎯</span>
+                <h3>Precisión Táctica</h3>
+                <p>El dominio milimétrico del espacio y el tiempo. Cada jugada responde a esquemas de ajedrez humano y digital donde la estrategia supera a la fuerza bruta.</p>
+            </div>
+            <div class="intro-card">
+                <span class="intro-symbol">👑</span>
+                <h3>Legado de Inmortales</h3>
+                <p>Atletas y competidores virtuales que rompieron las barreras de la biología y la consola para establecer récords absolutos e inspirar al mundo.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Catálogo de Deportes -->
+    <div id="catalog" class="museum-catalog">
+        <div class="hall-header">
+            <h2>SALAS DE EXPOSICIÓN TEMÁTICA</h2>
+            <p>Selecciona una disciplina para acceder a su expediente enciclopédico interactivo.</p>
+        </div>
+
+        <!-- DEPORTES DE VERANO (IZQUIERDA) -->
+        <section id="verano" class="museum-section" style="text-align: left;">
+            <h2 class="section-title" style="color: var(--accent-neon-magenta); border-left-color: var(--accent-neon-magenta);">☀️ DEPORTES DE VERANO</h2>
+            <div class="sports-grid">
+                {% for sport in summer %}
+                <a href="{{ url_for('sport_detail', sport_id=sport.id) }}" class="vector-card" style="border-color: {{ sport.primary_color }}66;">
+                    <span class="vector-card-icon">{{ sport.icon_symbol }}</span>
+                    <span class="vector-card-tag" style="color: {{ sport.primary_color }};">{{ sport.category }}</span>
+                    <h3>{{ sport.name }}</h3>
+                    <p>{{ sport.tagline }}</p>
+                    <span class="vector-card-btn" style="color: {{ sport.primary_color }};">ENTRAR A LA SALA &rarr;</span>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- ESPORTS (EN EL MEDIO) -->
+        <section id="esports" class="museum-section" style="text-align: center;">
+            <h2 class="section-title" style="color: var(--accent-neon-cyan); border-left-color: var(--accent-neon-cyan); display: inline-block; padding-left: 1rem;">🎮 DEPORTES eSPORTS</h2>
+            <div class="sports-grid" style="margin-top: 2rem;">
+                {% for sport in esports %}
+                <a href="{{ url_for('sport_detail', sport_id=sport.id) }}" class="vector-card" style="border-color: {{ sport.primary_color }}66; text-align: left;">
+                    <span class="vector-card-icon">{{ sport.icon_symbol }}</span>
+                    <span class="vector-card-tag" style="color: {{ sport.primary_color }};">{{ sport.category }}</span>
+                    <h3>{{ sport.name }}</h3>
+                    <p>{{ sport.tagline }}</p>
+                    <span class="vector-card-btn" style="color: {{ sport.primary_color }};">ENTRAR A LA SALA &rarr;</span>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+
+        <!-- DEPORTES DE INVIERNO (DERECHA) -->
+        <section id="invierno" class="museum-section" style="text-align: right;">
+            <h2 class="section-title" style="color: #00f2fe; border-left: none; border-right: 4px solid #00f2fe; padding-right: 1rem; display: inline-block;">❄️ DEPORTES DE INVIERNO</h2>
+            <div class="sports-grid" style="margin-top: 2rem;">
+                {% for sport in winter %}
+                <a href="{{ url_for('sport_detail', sport_id=sport.id) }}" class="vector-card" style="border-color: {{ sport.primary_color }}66; text-align: left;">
+                    <span class="vector-card-icon">{{ sport.icon_symbol }}</span>
+                    <span class="vector-card-tag" style="color: {{ sport.primary_color }};">{{ sport.category }}</span>
+                    <h3>{{ sport.name }}</h3>
+                    <p>{{ sport.tagline }}</p>
+                    <span class="vector-card-btn" style="color: {{ sport.primary_color }};">ENTRAR A LA SALA &rarr;</span>
+                </a>
+                {% endfor %}
+            </div>
+        </section>
+    </div>
+{% endblock %}

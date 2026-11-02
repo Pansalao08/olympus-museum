@@ -1,0 +1,370 @@
+{% extends "base.html" %}
+
+{% block title %}OLYMPUS | {{ sport.name }}{% endblock %}
+
+{% block extra_css %}
+<style>
+    .sport-hero {
+        padding: 5rem 5% 4rem 5%;
+        background: radial-gradient(circle at top right, {{ sport.primary_color }}33 0%, var(--bg-dark) 70%);
+        border-bottom: 2px solid {{ sport.primary_color }}55;
+    }
+
+    .sport-hero-content {
+        max-width: 900px;
+    }
+
+    .sport-badge {
+        display: inline-block;
+        padding: 0.4rem 1.2rem;
+        font-size: 0.75rem;
+        font-weight: 800;
+        letter-spacing: 2px;
+        color: {{ sport.primary_color }};
+        border: 2px solid {{ sport.primary_color }};
+        border-radius: 50px;
+        margin-bottom: 1rem;
+        background: rgba(255, 255, 255, 0.03);
+        box-shadow: 0 0 15px {{ sport.primary_color }}44;
+    }
+
+    .sport-hero h1 {
+        font-family: 'Cinzel', serif;
+        font-size: clamp(2.8rem, 6vw, 5rem);
+        font-weight: 900;
+        color: var(--text-main);
+        margin-bottom: 1rem;
+        text-shadow: 0 0 25px {{ sport.primary_color }}66;
+    }
+
+    .sport-hero p {
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+    }
+
+    .museum-content-section {
+        padding: 4rem 5%;
+        max-width: 1300px;
+        margin: 0 auto;
+    }
+
+    .info-card {
+        background: var(--bg-card);
+        padding: 3rem;
+        border-radius: 20px;
+        border: 1px solid var(--card-border);
+        margin-bottom: 4rem;
+    }
+
+    .info-card h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 2rem;
+        color: {{ sport.primary_color }};
+        margin-bottom: 1.5rem;
+    }
+
+    .info-card p {
+        font-size: 1.1rem;
+        line-height: 1.85;
+        color: var(--text-main);
+        white-space: pre-line;
+    }
+
+    .section-subtitle {
+        font-family: 'Cinzel', serif;
+        font-size: 2rem;
+        color: var(--text-main);
+        margin: 4rem 0 2rem 0;
+        padding-left: 1rem;
+        border-left: 4px solid {{ sport.primary_color }};
+    }
+
+    .timeline-container {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        margin-bottom: 4rem;
+        position: relative;
+        padding-left: 2rem;
+        border-left: 2px solid {{ sport.primary_color }};
+    }
+
+    .timeline-item {
+        display: flex;
+        align-items: flex-start;
+        gap: 1.5rem;
+        background: var(--bg-card);
+        padding: 1.8rem;
+        border-radius: 16px;
+        border: 1px solid var(--card-border);
+        transition: transform 0.3s ease;
+    }
+
+    .timeline-item:hover {
+        transform: translateX(8px);
+        border-color: {{ sport.primary_color }};
+        box-shadow: 0 0 15px {{ sport.primary_color }}33;
+    }
+
+    .timeline-icon {
+        font-size: 2.2rem;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 0.8rem;
+        border-radius: 12px;
+        border: 1px solid {{ sport.primary_color }}44;
+    }
+
+    .timeline-era {
+        font-family: 'Cinzel', serif;
+        font-weight: 700;
+        font-size: 1.15rem;
+        color: {{ sport.primary_color }};
+        display: block;
+        margin-bottom: 0.4rem;
+    }
+
+    .timeline-content p {
+        color: var(--text-muted);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    .grid-box {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+        margin-bottom: 4rem;
+    }
+
+    .detail-box {
+        background: var(--bg-card);
+        border: 1px solid var(--card-border);
+        padding: 2rem;
+        border-radius: 16px;
+    }
+
+    .detail-box h4 {
+        font-family: 'Cinzel', serif;
+        font-size: 1.2rem;
+        color: {{ sport.primary_color }};
+        margin-bottom: 0.8rem;
+    }
+
+    .detail-box p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+
+    .list-box ul {
+        list-style: none;
+    }
+
+    .list-box li {
+        padding: 0.8rem 1rem;
+        background: rgba(255, 255, 255, 0.02);
+        border-radius: 8px;
+        margin-bottom: 0.5rem;
+        border-left: 3px solid {{ sport.primary_color }};
+        font-size: 0.95rem;
+    }
+
+    .legends-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+    }
+
+    .legend-card {
+        background: var(--bg-card);
+        border-radius: 20px;
+        padding: 2.5rem;
+        border: 1px solid var(--card-border);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: transform 0.4s ease, border-color 0.4s ease;
+    }
+
+    .legend-card:hover {
+        transform: translateY(-8px);
+        border-color: {{ sport.primary_color }};
+        box-shadow: 0 0 25px {{ sport.primary_color }}33;
+    }
+
+    .legend-card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+    }
+
+    .legend-number {
+        font-family: 'Cinzel', serif;
+        font-size: 1.5rem;
+        font-weight: 900;
+        color: rgba(255, 255, 255, 0.15);
+    }
+
+    .legend-country {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 800;
+        color: {{ sport.primary_color }};
+    }
+
+    .legend-name {
+        font-family: 'Cinzel', serif;
+        font-size: 1.6rem;
+        color: var(--text-main);
+    }
+
+    .legend-nickname {
+        display: block;
+        font-size: 0.85rem;
+        color: {{ sport.primary_color }};
+        margin-bottom: 1rem;
+        font-style: italic;
+    }
+
+    .legend-bio {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        line-height: 1.6;
+        margin-bottom: 1.8rem;
+    }
+
+    .legend-stat-box {
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid {{ sport.primary_color }}66;
+        padding: 0.9rem 1.2rem;
+        border-radius: 10px;
+    }
+
+    .legend-stat-box span {
+        display: block;
+        font-size: 0.65rem;
+        letter-spacing: 1px;
+        color: {{ sport.primary_color }};
+        font-weight: 800;
+        margin-bottom: 0.2rem;
+    }
+
+    .legend-stat-box strong {
+        font-size: 1rem;
+        color: var(--text-main);
+    }
+
+    .nav-back-wrapper {
+        margin-top: 5rem;
+        text-align: center;
+    }
+
+    .back-btn {
+        display: inline-block;
+        padding: 1rem 2.5rem;
+        background: transparent;
+        border: 2px solid {{ sport.primary_color }};
+        border-radius: 50px;
+        color: var(--text-main);
+        font-weight: 800;
+        letter-spacing: 1px;
+        transition: all 0.3s ease;
+        box-shadow: 0 0 15px {{ sport.primary_color }}33;
+    }
+
+    .back-btn:hover {
+        background: {{ sport.primary_color }};
+        color: #000000;
+        box-shadow: 0 0 25px {{ sport.primary_color }};
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+    <!-- Hero de la Sala -->
+    <section class="sport-hero">
+        <div class="sport-hero-content">
+            <span class="sport-badge">{{ sport.category }} &mdash; {{ sport.icon_symbol }}</span>
+            <h1>{{ sport.name }}</h1>
+            <p>{{ sport.tagline }}</p>
+        </div>
+    </section>
+
+    <div class="museum-content-section">
+        <!-- Historia -->
+        <div class="info-card">
+            <h2>📜 Historia Documentada y Evolución</h2>
+            <p>{{ sport.history_long }}</p>
+        </div>
+
+        <!-- Línea de Tiempo -->
+        {% if sport.timeline %}
+        <h3 class="section-subtitle">⏳ Línea de Tiempo Histórica por Épocas</h3>
+        <div class="timeline-container">
+            {% for item in sport.timeline %}
+            <div class="timeline-item">
+                <div class="timeline-icon">{{ item.icon }}</div>
+                <div class="timeline-content">
+                    <span class="timeline-era">{{ item.era }}</span>
+                    <p>{{ item.desc }}</p>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+        {% endif %}
+
+        <!-- Reglamento y Ligas -->
+        <h3 class="section-subtitle">⚡ Reglamento Oficial y Ligas</h3>
+        <div class="grid-box list-box">
+            {% if sport.rules_and_tactics %}
+            <div class="detail-box">
+                <h4>Reglas y Tácticas</h4>
+                {% for rule in sport.rules_and_tactics %}
+                <p style="margin-bottom: 0.8rem;"><strong>{{ rule.title }}:</strong> {{ rule.desc }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+
+            {% if sport.teams_and_franchises %}
+            <div class="detail-box">
+                <h4>Franquicias e Instituciones de Élite</h4>
+                <ul>
+                    {% for team in sport.teams_and_franchises %}
+                    <li>{{ team | safe }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+
+        <!-- Salón de Inmortales -->
+        <h3 class="section-subtitle">🏛️ Salón de Inmortales (Leyendas y Promesas)</h3>
+        <div class="legends-grid">
+            {% for legend in sport.legends %}
+            <div class="legend-card">
+                <div>
+                    <div class="legend-card-top">
+                        <span class="legend-number">#{{ loop.index }}</span>
+                        <span class="legend-country">{{ legend.country }}</span>
+                    </div>
+                    <h4 class="legend-name">{{ legend.name }}</h4>
+                    <span class="legend-nickname">"{{ legend.nickname }}"</span>
+                    <p class="legend-bio">{{ legend.bio }}</p>
+                </div>
+                <div class="legend-stat-box">
+                    <span>MÉTRICA / RÉCORD</span>
+                    <strong>{{ legend.stat }}</strong>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- Botón de Retorno -->
+        <div class="nav-back-wrapper">
+            <a href="/" class="back-btn">&larr; Volver al Vestíbulo Principal</a>
+        </div>
+    </div>
+{% endblock %}

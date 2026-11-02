@@ -1,0 +1,192 @@
+{% extends "base.html" %}
+
+{% block title %}OLYMPUS | Desafío de Inmortales (Quiz){% endblock %}
+
+{% block extra_css %}
+<style>
+    .quiz-container {
+        max-width: 800px;
+        margin: 4rem auto;
+        padding: 0 2rem;
+    }
+
+    .quiz-header {
+        text-align: center;
+        margin-bottom: 3rem;
+    }
+
+    .quiz-header h1 {
+        font-family: 'Cinzel', serif;
+        font-size: 3rem;
+        color: var(--accent-neon-yellow);
+        margin-bottom: 1rem;
+        text-shadow: 0 0 20px rgba(255, 234, 0, 0.4);
+    }
+
+    .quiz-header p {
+        color: var(--text-muted);
+        font-size: 1.1rem;
+    }
+
+    .question-card {
+        background: var(--bg-card);
+        border: 1px solid var(--card-border);
+        border-radius: 20px;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+
+    .question-title {
+        font-family: 'Cinzel', serif;
+        font-size: 1.3rem;
+        color: var(--text-main);
+        margin-bottom: 1.5rem;
+    }
+
+    .options-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1rem;
+    }
+
+    .option-btn {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid var(--card-border);
+        color: var(--text-main);
+        padding: 1rem;
+        border-radius: 12px;
+        cursor: pointer;
+        font-weight: 700;
+        font-size: 0.95rem;
+        transition: all 0.3s ease;
+        text-align: left;
+    }
+
+    .option-btn:hover {
+        border-color: var(--accent-neon-cyan);
+        background: rgba(0, 242, 254, 0.08);
+        transform: translateY(-2px);
+    }
+
+    .option-btn.correct {
+        background: #059669 !important;
+        border-color: #34d399 !important;
+        color: #fff !important;
+    }
+
+    .option-btn.incorrect {
+        background: #dc2626 !important;
+        border-color: #f87171 !important;
+        color: #fff !important;
+    }
+
+    .quiz-results {
+        text-align: center;
+        background: var(--bg-card);
+        border: 2px solid var(--accent-neon-yellow);
+        padding: 3rem;
+        border-radius: 20px;
+        margin-top: 3rem;
+        display: none;
+    }
+
+    .quiz-results h2 {
+        font-family: 'Cinzel', serif;
+        font-size: 2.5rem;
+        color: var(--accent-neon-yellow);
+        margin-bottom: 1rem;
+    }
+
+    .quiz-results p {
+        font-size: 1.2rem;
+        color: var(--text-main);
+        margin-bottom: 2rem;
+    }
+
+    .restart-btn {
+        background: var(--accent-neon-yellow);
+        color: #000;
+        border: none;
+        padding: 1rem 2.5rem;
+        font-weight: 800;
+        border-radius: 50px;
+        cursor: pointer;
+        letter-spacing: 1px;
+        transition: transform 0.3s ease;
+    }
+
+    .restart-btn:hover {
+        transform: scale(1.05);
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="quiz-container">
+    <div class="quiz-header">
+        <h1>🎮 DESAFÍO DE INMORTALES</h1>
+        <p>Pon a prueba tus conocimientos enciclopédicos sobre historia deportiva y eSports.</p>
+    </div>
+
+    <div id="quizForm">
+        {% for q in questions %}
+        <div class="question-card" data-question-id="{{ q.id }}" data-answer="{{ q.answer }}">
+            <div class="question-title">{{ loop.index }}. {{ q.question }}</div>
+            <div class="options-grid">
+                {% for opt in q.options %}
+                <button class="option-btn" onclick="checkAnswer(this, '{{ opt }}', '{{ q.answer }}')">{{ opt }}</button>
+                {% endfor %}
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div id="resultsCard" class="quiz-results">
+        <h2>🏆 ¡EXAMEN COMPLETADO!</h2>
+        <p id="scoreText">Has obtenido X de Y aciertos.</p>
+        <button class="restart-btn" onclick="location.reload()">REINTENTAR DESAFÍO</button>
+    </div>
+</div>
+
+<script>
+    let score = 0;
+    let answeredCount = 0;
+    const totalQuestions = {{ questions | length }};
+
+    function checkAnswer(button, selected, correct) {
+        const card = button.closest('.question-card');
+        const buttons = card.querySelectorAll('.option-btn');
+        
+        // Evitar que sigan haciendo clic en esta pregunta
+        buttons.forEach(btn => btn.disabled = true);
+
+        if (selected === correct) {
+            button.classList.add('correct');
+            score++;
+        } else {
+            button.classList.add('incorrect');
+            // Resaltar la correcta
+            buttons.forEach(btn => {
+                if (btn.innerText.trim() === correct.trim()) {
+                    btn.classList.add('correct');
+                }
+            });
+        }
+
+        answeredCount++;
+
+        // Si ya respondió todas, mostrar resultados
+        if (answeredCount === totalQuestions) {
+            setTimeout(() => {
+                document.getElementById('quizForm').style.display = 'none';
+                const resultsCard = document.getElementById('resultsCard');
+                const scoreText = document.getElementById('scoreText');
+                scoreText.innerText = `Has obtenido ${score} de ${totalQuestions} aciertos correctos. ¡Eres un verdadero inmortal del Olimpo!`;
+                resultsCard.style.display = 'block';
+                resultsCard.scrollIntoView({ behavior: 'smooth' });
+            }, 800);
+        }
+    }
+</script>
+{% endblock %}

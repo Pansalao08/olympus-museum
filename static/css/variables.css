@@ -1,0 +1,15 @@
+:root {
+    --bg-primary: #07080a;
+    --bg-secondary: #0f1115;
+    --text-main: #f4f4f5;
+    --text-muted: #a1a1aa;
+    
+    --accent-winter: #00f2fe;  /* Para hockey y deportes de invierno */
+    --accent-summer: #ff6b00;  /* Para voleibol, baloncesto, fútbol, gimnasia */
+    --accent-gold: #c5a059;    /* Toke de museo clásico / elegante */
+    
+    --font-heading: 'Cinzel', serif;
+    --font-body: 'Plus Jakarta Sans', sans-serif;
+    
+    --transition-slow: 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}

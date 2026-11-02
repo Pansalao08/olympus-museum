@@ -1,0 +1,196 @@
+.sport-hero {
+    padding: 8rem 5% 5rem 5%;
+}
+
+.sport-hero-content {
+    max-width: 900px;
+}
+
+.category-tag {
+    display: inline-block;
+    padding: 0.4rem 1.2rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid;
+    border-radius: 50px;
+    margin-bottom: 1rem;
+}
+
+.sport-hero-content h1 {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 900;
+    margin-bottom: 1rem;
+}
+
+.sport-hero-content p {
+    font-size: 1.15rem;
+    color: #9ca3af;
+    line-height: 1.6;
+}
+
+.museum-content-section {
+    padding: 4rem 5%;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.info-card {
+    background: #0f1115;
+    padding: 3rem;
+    border-radius: 16px;
+    border: 1px solid rgba(255,255,255,0.05);
+    margin-bottom: 4rem;
+}
+
+.info-card h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+}
+
+.info-card p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #d1d5db;
+}
+
+.section-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    margin: 4rem 0 2rem 0;
+    border-left: 4px solid #c5a059;
+    padding-left: 1rem;
+}
+
+.rules-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-bottom: 4rem;
+}
+
+.rule-card {
+    background: #0f1115;
+    border: 1px solid;
+    padding: 2rem;
+    border-radius: 12px;
+}
+
+.rule-card h4 {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    margin-bottom: 0.8rem;
+}
+
+.rule-card p {
+    color: #9ca3af;
+    font-size: 0.95rem;
+}
+
+.legends-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 2.5rem;
+}
+
+.legend-card {
+    background: #0f1115;
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid rgba(255,255,255,0.05);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.4s ease;
+}
+
+.legend-card:hover {
+    transform: translateY(-8px);
+}
+
+.legend-card-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.legend-number {
+    font-family: 'Cinzel', serif;
+    font-size: 1.4rem;
+    font-weight: 900;
+    color: rgba(255,255,255,0.2);
+}
+
+.legend-country {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.legend-name {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    color: #fff;
+}
+
+.legend-nickname {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 1rem;
+    font-style: italic;
+}
+
+.legend-bio {
+    font-size: 0.95rem;
+    color: #9ca3af;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+}
+
+.legend-stat-box {
+    border: 1px solid;
+    padding: 0.8rem 1rem;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+}
+
+.legend-stat-box span {
+    font-size: 0.65rem;
+    letter-spacing: 1px;
+    font-weight: 700;
+}
+
+.legend-stat-box strong {
+    font-size: 1rem;
+    color: #fff;
+}
+
+.nav-back-wrapper {
+    margin-top: 5rem;
+    text-align: center;
+}
+
+.back-btn {
+    display: inline-block;
+    padding: 1rem 2.5rem;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid;
+    border-radius: 50px;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+}
+
+.back-btn:hover {
+    background: #c5a059;
+    color: #000;
+    border-color: #c5a059;
+}

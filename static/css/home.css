@@ -1,0 +1,184 @@
+body {
+    background-color: #07080a;
+    color: #f3f4f6;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Pantalla de Bienvenida (Hero Splash) */
+.hero-splash-screen {
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background: radial-gradient(circle at center, #111827 0%, #030712 100%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 3000;
+    padding: 0 2rem;
+}
+
+.splash-badge {
+    padding: 0.5rem 1.5rem;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 3px;
+    color: #c5a059;
+    border: 1px solid rgba(197, 160, 89, 0.4);
+    border-radius: 50px;
+    margin-bottom: 2rem;
+}
+
+.splash-main-title {
+    font-family: 'Cinzel', serif;
+    font-size: clamp(4rem, 10vw, 8rem);
+    font-weight: 900;
+    letter-spacing: 6px;
+    background: linear-gradient(180deg, #ffffff 30%, #6b7280 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.splash-desc {
+    font-size: 1.1rem;
+    letter-spacing: 2px;
+    color: #9ca3af;
+    max-width: 600px;
+    margin-bottom: 3rem;
+}
+
+.btn-explore {
+    background: transparent;
+    color: #fff;
+    border: 2px solid #c5a059;
+    padding: 1.2rem 3rem;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 2px;
+    cursor: pointer;
+    border-radius: 50px;
+    transition: all 0.4s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+
+.btn-explore:hover {
+    background: #c5a059;
+    color: #000;
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(197, 160, 89, 0.4);
+}
+
+/* Catálogo Oculto Inicialmente */
+.museum-catalog {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1s ease, transform 1s ease;
+    padding-top: 4rem;
+}
+
+.catalog-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* Tarjetas Vectoriales / Siluetas por Deporte */
+.hall-header {
+    text-align: center;
+    padding: 4rem 5% 2rem 5%;
+}
+
+.hall-header h2 {
+    font-family: 'Cinzel', serif;
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+    margin-bottom: 0.5rem;
+}
+
+.museum-section {
+    padding: 3rem 5%;
+}
+
+.section-title {
+    font-family: 'Cinzel', serif;
+    font-size: 1.8rem;
+    margin-bottom: 2rem;
+    letter-spacing: 2px;
+}
+
+.sports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2.5rem;
+}
+
+/* Tarjeta Silueta / Vectorial sin Imágenes */
+.vector-card {
+    position: relative;
+    height: 380px;
+    border-radius: 20px;
+    overflow: hidden;
+    text-decoration: none;
+    color: #fff;
+    padding: 2.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    border: 1px solid rgba(255,255,255,0.1);
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+}
+
+.vector-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.8);
+}
+
+.vector-card-icon {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+    font-size: 4rem;
+    opacity: 0.25;
+    transition: transform 0.5s ease;
+}
+
+.vector-card:hover .vector-card-icon {
+    transform: scale(1.2) rotate(10deg);
+    opacity: 0.5;
+}
+
+.vector-card-tag {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    opacity: 0.9;
+}
+
+.vector-card h3 {
+    font-family: 'Cinzel', serif;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+.vector-card p {
+    font-size: 0.95rem;
+    opacity: 0.85;
+    line-height: 1.4;
+    margin-bottom: 1.5rem;
+}
+
+.vector-card-btn {
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}

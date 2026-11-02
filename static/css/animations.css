@@ -1,0 +1,19 @@
+/* Animaciones de entrada fluidas */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUpHero {
+    from { transform: translateY(0); }
+    to { transform: translateY(-100vh); opacity: 0; pointer-events: none; }
+}
+
+.animate-fade {
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Estado cuando se oculta la pantalla de bienvenida */
+.splash-hidden {
+    animation: slideUpHero 0.9s cubic-bezier(0.77, 0, 0.175, 1) forwards;
+}
